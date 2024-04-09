@@ -2,15 +2,13 @@ name: '[PR] Closed test'
 
 on:
   pull_request:
-    branches:
-      - '**'
-      - '!changeset-release/**'
     types: [closed]
 
 jobs:
   pr-closed:
    name: Test PR closed
    runs-on: ubuntu-latest
+   if: ${{ !startsWith(github.event.pull_request.head.ref, 'changeset-release/') }}
    steps:
       - name: Checkout code
         uses: actions/checkout@v4
