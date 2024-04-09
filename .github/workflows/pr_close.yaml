@@ -1,0 +1,15 @@
+name: '[PR] Closed test'
+
+on:
+  pull_request:
+    types: [closed]
+    branches-ignore:
+      - 'changeset-release/**'
+
+jobs:
+  pr-closed:
+   name: Test PR closed
+   runs-on: ubuntu-latest
+   steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
