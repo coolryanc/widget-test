@@ -3,7 +3,8 @@ name: '[PR] Closed test'
 on:
   pull_request:
     types: [closed]
-    branches: ['**', '!changeset-release/**']
+    branches-ignore:
+      - 'changeset-release**'
 
 jobs:
   pr-closed:
