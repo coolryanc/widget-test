@@ -4,11 +4,14 @@ on:
   pull_request:
     types: [closed]
 
+env:
+  SHOULD_RUN_WORKFLOW: ${{ !startsWith(github.event.pull_request.head.ref, 'changeset-release/') }}
+
 jobs:
   pr-closed:
    name: Test PR closed
    runs-on: ubuntu-latest
-   if: ${{ !startsWith(github.event.pull_request.head.ref, 'changeset-release/') }}
+   if: $SHOULD_RUN_WORKFLOW
    steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -16,3 +19,11 @@ jobs:
       - name: Display PR information
         run: |
           echo "Ref ${{ github.event.pull_request.head.ref }}"
+  
+  test:
+    needs: pr-closed
+    name: Test job
+    runs-on: ubuntu-latest
+    steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
