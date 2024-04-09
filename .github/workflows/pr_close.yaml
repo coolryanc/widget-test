@@ -5,10 +5,15 @@ on:
     types: [closed]
 
 jobs:
+  check:
+    if: ${{ !startsWith(github.event.pull_request.head.ref, 'changeset-release/') }}
+    name: Check workflow
+    runs-on: ubuntu-latest
+
   pr-closed:
+   needs: check
    name: Test PR closed
    runs-on: ubuntu-latest
-   if: ${{ !startsWith(github.event.pull_request.head.ref, 'changeset-release/') }}
    steps:
       - name: Checkout code
         uses: actions/checkout@v4
