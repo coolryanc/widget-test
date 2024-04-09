@@ -11,7 +11,7 @@ jobs:
   pr-closed:
    name: Test PR closed
    runs-on: ubuntu-latest
-   if: ${{ env.SHOULD_RUN_WORKFLOW }}
+   if: env.SHOULD_RUN_WORKFLOW
    steps:
       - name: Checkout code
         uses: actions/checkout@v4
