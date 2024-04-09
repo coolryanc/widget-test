@@ -13,3 +13,7 @@ jobs:
    steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Display PR information
+        run: |
+          echo "Ref ${{ github.event.pull_request.head.ref }}"
